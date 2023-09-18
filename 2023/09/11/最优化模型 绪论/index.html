@@ -1,29 +1,80 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>最优化模型 绪论 | blackMZX</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/grids-responsive-min.min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/latest/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//lib.baomitu.com/clipboard.js/latest/clipboard.min.js"></script><script type="text/javascript" src="//lib.baomitu.com/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="//lib.baomitu.com/toastr.js/latest/toastr.min.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">最优化模型 绪论</h1><a id="logo" href="/.">blackMZX</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/tags/"><i class="fa fa-clipboard"> 标签</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">最优化模型 绪论</h1><div class="post-meta">2023-09-11<span> | </span><span class="category"><a href="/categories/%E6%9C%80%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9E%8B/">最优化模型</a></span></div><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">优化问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.2.</span> <span class="toc-text">问题的解是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E4%B8%8E%E5%85%A8%E5%B1%80%E6%9C%80%E4%BC%98%E7%82%B9"><span class="toc-number">1.3.</span> <span class="toc-text">局部与全局最优点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E5%A4%84%E7%90%86%E5%92%8C%E4%B8%8D%E5%8F%AF%E5%A4%84%E7%90%86%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">可处理和不可处理的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E5%8F%98%E6%8D%A2"><span class="toc-number">1.5.</span> <span class="toc-text">问题的变换</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98%E7%9A%84%E9%87%8D%E8%A6%81%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">优化问题的重要类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E5%92%8C%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">最小二乘和线性方程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8E%E7%A7%A9%E8%BF%91%E4%BC%BC%E4%B8%8E%E6%9C%80%E5%A4%A7%E6%96%B9%E5%B7%AE"><span class="toc-number">2.2.</span> <span class="toc-text">低秩近似与最大方差</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E4%B8%8E%E4%BA%8C%E6%AC%A1%E8%A7%84%E5%88%92"><span class="toc-number">2.3.</span> <span class="toc-text">线性规划与二次规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%B8%E4%BC%98%E5%8C%96"><span class="toc-number">2.4.</span> <span class="toc-text">凸优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E4%BC%98%E5%8C%96"><span class="toc-number">2.5.</span> <span class="toc-text">组合优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E5%87%B8%E4%BC%98%E5%8C%96"><span class="toc-number">2.6.</span> <span class="toc-text">非凸优化</span></a></li></ol></li></ol></div></div><div class="post-content"><p>优化是对各种实际问题作出有效决策或预测的技术。简言之，作出决策的过程要先从为具体问题建立合适的数学模型开始，然后通过应用有效的数值算法来求解模型。一个优化设计是在满足该问题所有的约束条件下，给出尽可能最优的目标值。</p>
 <p>本章将介绍优化问题的主要概念和构成部分，本章的许多概念并没有给出正式的定义，将在后面的章节中提供更加严谨的定义表述。</p>
 <span id="more"></span>
-
-<h1 id="优化问题"><a href="#优化问题" class="headerlink" title="优化问题"></a>优化问题</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><strong>优化问题的标准形式。</strong>这将主要处理可以写成如下标准形式的优化问题：<br>$$<br>\begin{alignat*}{1}<br>&amp;p^*&#x3D;\min_{x}f_0(x)\qquad\qquad(1.1)\newline<br>&amp;s.t.:\ f_i(x)\leq0,\ i&#x3D;1,…,m,<br>\end{alignat*}<br>$$<br>其中，</p>
+<h1 id="优化问题"><a href="#优化问题" class="headerlink" title="优化问题"></a>优化问题</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><strong>优化问题的标准形式。</strong>这将主要处理可以写成如下标准形式的优化问题：</p>
+<script type="math/tex; mode=display">
+\begin{alignat*}{1}
+&p^*=\min_{x}f_0(x)\qquad\qquad(1.1)\newline
+&s.t.:\ f_i(x)\leq0,\ i=1,...,m,
+\end{alignat*}</script><p>其中，</p>
 <ul>
 <li>向量$x\in\mathbb{R}^n$是决策变量；</li>
 <li>$f_0$：$\mathbb{R}^n\to\mathbb{R}$是目标函数或成本函数；</li>
-<li>$f_i$：$\mathbb{R}^n\to\mathbb{R}，i&#x3D;1,···，m$，表示约束函数；</li>
+<li>$f_i$：$\mathbb{R}^n\to\mathbb{R}，i=1,···，m$，表示约束函数；</li>
 <li>$p^*$表示最优值。</li>
 </ul>
-<p><strong>带等式约束的优化问题。</strong>在有些情况下，问题可能会出现明确的等式约束和不等式约束，即：<br>$$<br>\begin{alignat*}{1}<br>&amp;p^*&#x3D;\min_{x}f_0(x)\newline<br>&amp;s.t.:\ f_i(x)\leq0,\ i&#x3D;1,…,m,\newline<br>&amp;h_i(x)&#x3D;0,\ i&#x3D;1,…,m,<br>\end{alignat*}<br>$$<br>其中$h_i$是给定的函数。</p>
-<p><strong>带集合约束的优化问题。</strong>在有些情况下，问题的约束条件是通过$x\in\chi$这种集合元素约束的抽象形式表示的，其中$\chi$为$\mathbb{R}^n$的子集，相应的数学表示为：<br>$$<br>p^*&#x3D;\min_{x\in\chi}f_0(x)<br>$$<br>或也可以表示为<br>$$<br>\begin{alignat*}{1}<br>&amp;p^*&#x3D;\min_{x}f_0(x)\newline<br>&amp;s.t.:\ x\in\chi<br>\end{alignat*}<br>$$<br><strong>最大值形式的优化问题。</strong>一些优化问题以求目标函数最大值（而不是最小值）的形式出现，也就是：<br>$$<br>p^*&#x3D;\max_{x\in\chi}g_0(x)\qquad(1.2)<br>$$<br>这种问题很容易转化为求最小值的标准问题，事实上，对于任意$g_0$,都有：<br>$$<br>\max_{x\in\chi}g_0(x)&#x3D;-\min_{x\in\chi}-g_0(x)<br>$$<br>因此，求最大值问题可以重新表述为如下求最小值问题,其中$f_0(x)&#x3D;-g_0(x)$<br>$$<br>-p^*&#x3D;\min_{x\in\chi}f_0(x)<br>$$<br><strong>可行集。</strong>问题（1.1）的可行集定义如下：<br>$$<br>\chi&#x3D;{x\in\mathbb{R}^n\ s.t.:\ f_i(x)\leq0,\ i&#x3D;1,···,m}<br>$$<br>如果点$x$属于可行集$\chi$，也就是说，它满足约束条件，那么称$x$对于问题（1.1）是可行的。如果不可能同时满足所有约束条件，那么可行集就是空集，在这种情况下称该问题是不可行的。为了方便起见，对于不可行的最小化问题，记其最优值为$p^*&#x3D;+\infty$；对于不可行问题的最大值问题，记其最优值$p^*&#x3D;-\infty$。</p>
+<p><strong>带等式约束的优化问题。</strong>在有些情况下，问题可能会出现明确的等式约束和不等式约束，即：</p>
+<script type="math/tex; mode=display">
+\begin{alignat*}{1}
+&p^*=\min_{x}f_0(x)\newline
+&s.t.:\ f_i(x)\leq0,\ i=1,...,m,\newline
+&h_i(x)=0,\ i=1,...,m,
+\end{alignat*}</script><p>其中$h_i$是给定的函数。</p>
+<p><strong>带集合约束的优化问题。</strong>在有些情况下，问题的约束条件是通过$x\in\chi$这种集合元素约束的抽象形式表示的，其中$\chi$为$\mathbb{R}^n$的子集，相应的数学表示为：</p>
+<script type="math/tex; mode=display">
+p^*=\min_{x\in\chi}f_0(x)</script><p>或也可以表示为</p>
+<script type="math/tex; mode=display">
+\begin{alignat*}{1}
+&p^*=\min_{x}f_0(x)\newline
+&s.t.:\ x\in\chi
+\end{alignat*}</script><p><strong>最大值形式的优化问题。</strong>一些优化问题以求目标函数最大值（而不是最小值）的形式出现，也就是：</p>
+<script type="math/tex; mode=display">
+p^*=\max_{x\in\chi}g_0(x)\qquad(1.2)</script><p>这种问题很容易转化为求最小值的标准问题，事实上，对于任意$g_0$,都有：</p>
+<script type="math/tex; mode=display">
+\max_{x\in\chi}g_0(x)=-\min_{x\in\chi}-g_0(x)</script><p>因此，求最大值问题可以重新表述为如下求最小值问题,其中$f_0(x)=-g_0(x)$</p>
+<script type="math/tex; mode=display">
+-p^*=\min_{x\in\chi}f_0(x)</script><p><strong>可行集。</strong>问题（1.1）的可行集定义如下：</p>
+<script type="math/tex; mode=display">
+\chi=\{x\in\mathbb{R}^n\ s.t.:\ f_i(x)\leq0,\ i=1,···,m\}</script><p>如果点$x$属于可行集$\chi$，也就是说，它满足约束条件，那么称$x$对于问题（1.1）是可行的。如果不可能同时满足所有约束条件，那么可行集就是空集，在这种情况下称该问题是不可行的。为了方便起见，对于不可行的最小化问题，记其最优值为$p^<em>=+\infty$；对于不可行问题的最大值问题，记其最优值$p^</em>=-\infty$。</p>
 <h2 id="问题的解是什么"><a href="#问题的解是什么" class="headerlink" title="问题的解是什么"></a>问题的解是什么</h2><p>对于一个优化问题，我们通常对计算目标函数的最优值及相应的最小值点感兴趣，这里的最小值点是使目标函数达到最优值的点且满足约束条件的向量。</p>
-<p><strong>可行性问题。</strong>在一些情况下并没有提供目标函数，这意味着我们只是对找到一个可行点感兴趣，或者是想要确定问题不可行。通常若问题是可行的，我们一般将$f_0$设置为常数以表示对点$x$的选择并不重要。对于具有标准形式（1,1）的问题的求解，等价于寻找一个满足不等式$f_i(x)\leq0(i&#x3D;1,···,m)$的点。</p>
-<p><strong>最优集。</strong>问题（1,1）的最优集或解集被定义为目标函数达到最优解的可行点集：<br>$$<br>\chi_{opt}&#x3D;{x\in\mathbb{R}^n\ s.t.:\ f_0(x)&#x3D;p^*,f_i(x)\leq0,i&#x3D;1,···，m}.<br>$$<br>为了表示最优集，其标准的符号是使用argmin：<br>$$<br>\chi_{opt}&#x3D;\mathop{\arg\min}\limits_{x\in\chi}f_0(x).<br>$$<br><strong>最优集何时为空集。</strong>最优集可能会不存在，因此最优集也可能是空集。这有两个原因，一个是该问题是不可行的，即$\chi$本身是空集（没有满足约束条件的点）；另一个原因更加微妙，虽然$\chi$不是空集，但是最优值只能在极限条件下达到。例如，如下优化问题：<br>$$<br>p^*&#x3D;\min_{x}e^{-x}<br>$$<br>就没有最优点，因为其最优值$p^*&#x3D;0$只能在$x\to+\infty$的极限情况下达到。另一个例子是当约束条件包括严格不等式时，例如：<br>$$<br>p^*&#x3D;\min_{x}x\ s.t.:\ 0&lt;x\le1.<br>$$<br><strong>次最优性。</strong>如果一个点$x$对于问题（1,1)是可行的且满足如下条件：<br>$$<br>p^<em>\le f_0(x)\le p^</em>+\epsilon.<br>$$<br>则称它是$\epsilon$次最优的。换言之，点$x$是$\epsilon$接近达到最优值$p^*$的，通常，数值计算只能计算次最优解，永远无法实现真正的最优解。</p>
-<h2 id="局部与全局最优点"><a href="#局部与全局最优点" class="headerlink" title="局部与全局最优点"></a>局部与全局最优点</h2><p>称点$z$为问题（1.1）的一个局部最优点，如果存在R&gt;0使得$z$对于以下问题是最优的：<br>$$<br>\min_{x}f_0(x)s.t.:\ f_i(x)\le0,i&#x3D;1,···,m,|x_i-z_i|\le R,i&#x3D;1,···,n.<br>$$<br>换言之，局部最小值点$x$只能在可行集中的领域内最小化$f_0(x)$。</p>
+<p><strong>可行性问题。</strong>在一些情况下并没有提供目标函数，这意味着我们只是对找到一个可行点感兴趣，或者是想要确定问题不可行。通常若问题是可行的，我们一般将$f_0$设置为常数以表示对点$x$的选择并不重要。对于具有标准形式（1,1）的问题的求解，等价于寻找一个满足不等式$f_i(x)\leq0(i=1,···,m)$的点。</p>
+<p><strong>最优集。</strong>问题（1,1）的最优集或解集被定义为目标函数达到最优解的可行点集：</p>
+<script type="math/tex; mode=display">
+\chi_{opt}=\{x\in\mathbb{R}^n\ s.t.:\ f_0(x)=p^*,f_i(x)\leq0,i=1,···，m\}.</script><p>为了表示最优集，其标准的符号是使用argmin：</p>
+<script type="math/tex; mode=display">
+\chi_{opt}=\mathop{\arg\min}\limits_{x\in\chi}f_0(x).</script><p><strong>最优集何时为空集。</strong>最优集可能会不存在，因此最优集也可能是空集。这有两个原因，一个是该问题是不可行的，即$\chi$本身是空集（没有满足约束条件的点）；另一个原因更加微妙，虽然$\chi$不是空集，但是最优值只能在极限条件下达到。例如，如下优化问题：</p>
+<script type="math/tex; mode=display">
+p^*=\min_{x}e^{-x}</script><p>就没有最优点，因为其最优值$p^*=0$只能在$x\to+\infty$的极限情况下达到。另一个例子是当约束条件包括严格不等式时，例如：</p>
+<script type="math/tex; mode=display">
+p^*=\min_{x}x\ s.t.:\ 0<x\le1.</script><p><strong>次最优性。</strong>如果一个点$x$对于问题（1,1)是可行的且满足如下条件：</p>
+<script type="math/tex; mode=display">
+p^*\le f_0(x)\le p^*+\epsilon.</script><p>则称它是$\epsilon$次最优的。换言之，点$x$是$\epsilon$接近达到最优值$p^*$的，通常，数值计算只能计算次最优解，永远无法实现真正的最优解。</p>
+<h2 id="局部与全局最优点"><a href="#局部与全局最优点" class="headerlink" title="局部与全局最优点"></a>局部与全局最优点</h2><p>称点$z$为问题（1.1）的一个局部最优点，如果存在R&gt;0使得$z$对于以下问题是最优的：</p>
+<script type="math/tex; mode=display">
+\min_{x}f_0(x)s.t.:\ f_i(x)\le0,i=1,···,m,|x_i-z_i|\le R,i=1,···,n.</script><p>换言之，局部最小值点$x$只能在可行集中的领域内最小化$f_0(x)$。</p>
 <p>全局最优（或简称最优）这一概念用于区分最优集$\chi_{opt}$中的点和局部最优点。</p>
 <h2 id="可处理和不可处理的问题"><a href="#可处理和不可处理的问题" class="headerlink" title="可处理和不可处理的问题"></a>可处理和不可处理的问题</h2><p>一些类型的问题，如寻找有限的线性等式或不等式组的解，可以用数值方法可靠有效地求解；相反，对于其他某些优化问题，目前没有可靠有效的解决方法。我们的重点是聚焦可处理的模型，特别地，可以用线性代数问题的形式或凸形式表述的模型通常都是可处理的。此外，如果一个凸模型有一些特殊的结构，那么人们通常可以使用现有的非常可靠的数值计算包找到最优解，如CVX、Yalmip等。</p>
 <p>我们需要注意可处理性通常不是问题本身的特性，而是由我们对问题的表述和建模所决定的。如果在建模阶段投入更多的精力和智慧，一个在某种表述下看起来很难处理的问题可能会变得容易处理。</p>
-<h2 id="问题的变换"><a href="#问题的变换" class="headerlink" title="问题的变换"></a>问题的变换</h2><p>由问题（1.1）所表述的优化形式非常灵活，允许我们作很多变换，有助于将给定的问题转化为可处理的形式。例如，如下优化问题：<br>$$<br>\min_x\sqrt{(x_1+1)^2+(x_2-2)^2}s.t.:\ x_1\ge0<br>$$<br>与如下优化问题<br>$$<br>\min_x((x_1+1)^2+(x_2-2)^2)s.t.:\ x_1\ge0<br>$$<br>具有相同的最优集，这样的好处是目标函数是可微的。在其他情形下，变量代换往往也是有用的方法，例如对数变换。</p>
-<h1 id="优化问题的重要类型"><a href="#优化问题的重要类型" class="headerlink" title="优化问题的重要类型"></a>优化问题的重要类型</h1><h2 id="最小二乘和线性方程"><a href="#最小二乘和线性方程" class="headerlink" title="最小二乘和线性方程"></a>最小二乘和线性方程</h2><p>一个线性最小二乘问题可以用以下形式来描述：<br>$$<br>\min_x\sum_{i&#x3D;1}^m(\sum_{j&#x3D;1}^nA_{ij}x_j-b_i)^2,\qquad (1.3)<br>$$<br>其中$A_{ij},b_i(1\le i\le m,1\le j\le n)$是给定的常数，$x\in\mathbb{R}^n$为变量。最小二乘问题出现在许多情形下，如线性回归等统计估计问题中。</p>
-<p>最小二乘法在求解一组线性方程系统中有重要作用。假设我们想找到一个向量$x\in\mathbb{R}^n$使得：<br>$$<br>\sum_{j&#x3D;1}^nA_{ij}x_j&#x3D;b_i,\ i&#x3D;1,···,m.<br>$$<br>这类问题可以归结为形式（1.3）的最小二乘问题。如果式（1.3）的最优值为0，则找到了对应方程的解；否则，式（1.3）的最优解给出了线性方程组的近似解。</p>
-<h2 id="低秩近似与最大方差"><a href="#低秩近似与最大方差" class="headerlink" title="低秩近似与最大方差"></a>低秩近似与最大方差</h2><p>对于给定矩阵（矩阵元素为$A_{ij}(1\le i\le m,\ 1\le j\le n)$）的秩一近似问题形式如下：<br>$$<br>\min_{x\in\mathbb{R}^n,z\in\mathbb{R}^m}\sum_{i&#x3D;1}^m(\sum_{j&#x3D;1}^nA_{ij}-z_ix_j)^2.<br>$$<br>上述问题可以解释为最小二乘问题（1.3）的一个变形，其中平方项内的函数是非线性的，这是因为存在变量$z_ix_j$，目标函数越小，意味着$A_{ij}$可以更好地被$z_jx_i$近似。因此，“行”都是相同向量（$x_1,···,x_m$）经过以（$z_1,···,z_m$）为尺度的尺度变换后的向量。</p>
-<h2 id="线性规划与二次规划"><a href="#线性规划与二次规划" class="headerlink" title="线性规划与二次规划"></a>线性规划与二次规划</h2><p>线性规划（LP）问题具有如下形式：<br>$$<br>\min_x\sum_{j&#x3D;1}^nc_jx_j\qquad s.t.:\ \sum_{j&#x3D;1}^nA_{ij}x_j\le b_i,\ i&#x3D;1,···,m,<br>$$<br>其中$c_j,\ b_i$和$A_{ij}(1\le i\le m,\ 1\le j\le n)$是给定的实数。该问题是一般问题（1.1）的特例，其中函数$f_i(i&#x3D;0,···,m)$都是仿射的（即线性项加常数项）。线性规划是优化领域中使用最广泛的模型。</p>
-<p>二次规划问题（QP）是线性规划的进一步扩展，其对应的目标为二次函数，二次规划是将上述线性规划问题修改如下：<br>$$<br>\min_x\sum_{i&#x3D;1}^r(\sum_{j&#x3D;1}^nC_{ij}x_j)^2+\sum_{j&#x3D;1}^nc_jx_j\ s.t.:\ \sum_{j&#x3D;1}^nA_{ij}x_j\le b_i,\ i&#x3D;1,···,m,<br>$$<br>其中$C_{ij}(1\le i\le r,1\le j\le n)$是给定的常数。QP可以被认为是最小二乘和线性规划问题的进一步推广。</p>
+<h2 id="问题的变换"><a href="#问题的变换" class="headerlink" title="问题的变换"></a>问题的变换</h2><p>由问题（1.1）所表述的优化形式非常灵活，允许我们作很多变换，有助于将给定的问题转化为可处理的形式。例如，如下优化问题：</p>
+<script type="math/tex; mode=display">
+\min_x\sqrt{(x_1+1)^2+(x_2-2)^2}s.t.:\ x_1\ge0</script><p>与如下优化问题</p>
+<script type="math/tex; mode=display">
+\min_x((x_1+1)^2+(x_2-2)^2)s.t.:\ x_1\ge0</script><p>具有相同的最优集，这样的好处是目标函数是可微的。在其他情形下，变量代换往往也是有用的方法，例如对数变换。</p>
+<h1 id="优化问题的重要类型"><a href="#优化问题的重要类型" class="headerlink" title="优化问题的重要类型"></a>优化问题的重要类型</h1><h2 id="最小二乘和线性方程"><a href="#最小二乘和线性方程" class="headerlink" title="最小二乘和线性方程"></a>最小二乘和线性方程</h2><p>一个线性最小二乘问题可以用以下形式来描述：</p>
+<script type="math/tex; mode=display">
+\min_x\sum_{i=1}^m(\sum_{j=1}^nA_{ij}x_j-b_i)^2,\qquad (1.3)</script><p>其中$A_{ij},b_i(1\le i\le m,1\le j\le n)$是给定的常数，$x\in\mathbb{R}^n$为变量。最小二乘问题出现在许多情形下，如线性回归等统计估计问题中。</p>
+<p>最小二乘法在求解一组线性方程系统中有重要作用。假设我们想找到一个向量$x\in\mathbb{R}^n$使得：</p>
+<script type="math/tex; mode=display">
+\sum_{j=1}^nA_{ij}x_j=b_i,\ i=1,···,m.</script><p>这类问题可以归结为形式（1.3）的最小二乘问题。如果式（1.3）的最优值为0，则找到了对应方程的解；否则，式（1.3）的最优解给出了线性方程组的近似解。</p>
+<h2 id="低秩近似与最大方差"><a href="#低秩近似与最大方差" class="headerlink" title="低秩近似与最大方差"></a>低秩近似与最大方差</h2><p>对于给定矩阵（矩阵元素为$A_{ij}(1\le i\le m,\ 1\le j\le n)$）的秩一近似问题形式如下：</p>
+<script type="math/tex; mode=display">
+\min_{x\in\mathbb{R}^n,z\in\mathbb{R}^m}\sum_{i=1}^m(\sum_{j=1}^nA_{ij}-z_ix_j)^2.</script><p>上述问题可以解释为最小二乘问题（1.3）的一个变形，其中平方项内的函数是非线性的，这是因为存在变量$z<em>ix_j$，目标函数越小，意味着$A</em>{ij}$可以更好地被$z_jx_i$近似。因此，“行”都是相同向量（$x_1,···,x_m$）经过以（$z_1,···,z_m$）为尺度的尺度变换后的向量。</p>
+<h2 id="线性规划与二次规划"><a href="#线性规划与二次规划" class="headerlink" title="线性规划与二次规划"></a>线性规划与二次规划</h2><p>线性规划（LP）问题具有如下形式：</p>
+<script type="math/tex; mode=display">
+\min_x\sum_{j=1}^nc_jx_j\qquad s.t.:\ \sum_{j=1}^nA_{ij}x_j\le b_i,\ i=1,···,m,</script><p>其中$c<em>j,\ b_i$和$A</em>{ij}(1\le i\le m,\ 1\le j\le n)$是给定的实数。该问题是一般问题（1.1）的特例，其中函数$f_i(i=0,···,m)$都是仿射的（即线性项加常数项）。线性规划是优化领域中使用最广泛的模型。</p>
+<p>二次规划问题（QP）是线性规划的进一步扩展，其对应的目标为二次函数，二次规划是将上述线性规划问题修改如下：</p>
+<script type="math/tex; mode=display">
+\min_x\sum_{i=1}^r(\sum_{j=1}^nC_{ij}x_j)^2+\sum_{j=1}^nc_jx_j\ s.t.:\ \sum_{j=1}^nA_{ij}x_j\le b_i,\ i=1,···,m,</script><p>其中$C_{ij}(1\le i\le r,1\le j\le n)$是给定的常数。QP可以被认为是最小二乘和线性规划问题的进一步推广。</p>
 <h2 id="凸优化"><a href="#凸优化" class="headerlink" title="凸优化"></a>凸优化</h2><p>凸优化是形如式（1.1）的优化问题，其中目标函数和约束函数具有凸性这种特殊性质。粗略地说，凸函数呈现出一个“碗形”图。</p>
 <p>最小二乘、LP和（凸）QP模型是可处理的凸优化的例子。</p>
 <h2 id="组合优化"><a href="#组合优化" class="headerlink" title="组合优化"></a>组合优化</h2><p>在组合优化问题中，其决策变量是布尔类型（0或1），或更一般的整数，它反映了要做出的离散选择。许多实际问题还涉及整数和实值变量的混合，因此称这种问题为混合整数规划（MIP），组合问题或更一般的MIP往往属于计算比较困难的问题。</p>
